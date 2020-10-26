@@ -141,12 +141,8 @@ define :riff do
   end
 end
 
-define :cool_guitar do |climax=false|
-  if(climax)
-    solo
-  else
-    riff
-  end
+define :cool_guitar do
+  riff
   4.times do
     loud_drum
   end
@@ -154,11 +150,7 @@ define :cool_guitar do |climax=false|
   drum_detail
   2.times do loud_drum end
   
-  if(climax)
-    solo
-  else
-    riff
-  end
+  riff
   4.times do
     loud_drum
   end
@@ -167,18 +159,44 @@ define :cool_guitar do |climax=false|
   2.times do loud_drum end
 end
 
-define :solo do
-  in_thread do
-    # |n, div=3, rel=0.5, sl=0.25, sus=0|
-    with_fx :compressor, amp: 0.9 do
-      guitar :e6, 4, 1, 0.77, 0
+define :solo1 do
+  use_synth :fm
+  with_fx :compressor, amp: 0.8 do
+    in_thread do
+      with_fx :distortion, distort: 0.8 do
+        play :g6, divisor:(4), attack: 2, attack_level: 0.2, decay: 0.1, decay_level: 1, sustain: 1, release: 0.1, sustain_level: 1
+        sleep 3
+        play :f6, divisor:(4), attack: 0.1, sustain: 0.8, release: 0.1
+        sleep 1
+      end
+      guitar :e6, 4, 1, 0.77, 0.3
       guitar :e6, 4, 0.1, 0.23, 0.1
       guitar :g6, 4, 0.1, 0.35, 0.1
-      guitar :e6, 4, 0.1, 0.35, 0.1
-      guitar :d6, 4, 0.1, 0.3, 0.1
-      guitar :g6, 4, 1, 1, 0.5
-      guitar :f6, 4, 0.9, 1, 0.4
+      guitar :a6, 4, 0.1, 0.35, 0.1
+      guitar :g6, 4, 0.1, 0.3, 0.1
+      guitar :f6, 4, 0.1, 0.3, 0.2
+      guitar :g6, 4, 0.1, 0.35, 0.1
+      guitar :f6, 4, 0.1, 0.35, 0.2
+      guitar :e6, 4, 0.9, 1, 0.1
       
+      with_fx :distortion, distort: 0.8 do
+        play :e6, divisor:(4), sustain: 0.57, release: 0.2
+        sleep 0.77
+        play :f6, divisor:(4), sustain: 0.15, release: 0.1
+        sleep 0.25
+        play :d6, divisor:(4), sustain: 0.13, release: 0.1
+        sleep 0.23
+        play :e6, divisor:(4), sustain: 0.12, release: 0
+        sleep 0.12
+        play :f6, divisor:(4), sustain: 0.15, release: 0.1
+        sleep 0.25
+        play :e6, divisor:(4), sustain: 0.25, release: 0.1
+        sleep 0.38
+        play :g6, divisor:(4), sustain: 0.8, release: 0.2
+        sleep 1
+        play :f6, divisor:(4), sustain: 0.6, release: 0.4
+        sleep 1
+      end
       guitar :e6, 4, 1, 0.77, 0.3
       guitar :e6, 4, 0.1, 0.23, 0.1
       guitar :g6, 4, 0.1, 0.35, 0.1
@@ -192,6 +210,80 @@ define :solo do
   end
 end
 
+define :solo2 do
+  in_thread do
+    with_fx :compressor, amp: 0.9 do
+      guitar :e7, 4, 1, 0.77, 0
+      guitar :e7, 4, 0.1, 0.23, 0.1
+      guitar :g7, 4, 0.1, 0.35, 0.1
+      guitar :e7, 4, 0.1, 0.35, 0.1
+      guitar :d7, 4, 0.1, 0.3, 0.1
+      
+      #    guitar :g7, 4, 1, 1, 0.5
+      with_fx :compressor, amp: 0.9 do
+        with_fx :distortion, distort: 0.8 do
+          use_synth :fm
+          play :g7, divisor:(4), attack_level: 1, decay: 0.5, decay_level: 0.1, sustain: 0.5, sustain_level: 0.1, release: 0.1
+          play :g8, divisor:(4), attack_level: 0.1, decay: 0.5, decay_level: 1, sustain: 0.3, release: 0.3
+          sleep 1
+        end
+      end
+      
+      guitar :f7, 4, 1, 1, 0.2
+      
+      guitar :e7, 4, 1, 0.77, 0.3
+      guitar :e7, 4, 0.1, 0.23, 0.1
+      guitar :g7, 4, 0.1, 0.35, 0.1
+      guitar :a7, 4, 0.1, 0.35, 0.1
+      guitar :g7, 4, 0.1, 0.3, 0.1
+      guitar :f7, 4, 0.1, 0.3, 0.2
+      guitar :g7, 4, 0.1, 0.35, 0.1
+      guitar :f7, 4, 0.1, 0.35, 0.2
+      guitar :e7, 4, 0.9, 1, 0.1
+      
+      # pt 2
+      
+      with_fx :compressor, amp: 0.9 do
+        with_fx :distortion, distort: 0.8 do
+          use_synth :fm
+          play :e7, divisor:(4), sustain: 0.57, release: 0.2
+          sleep 0.77
+          play :f7, divisor:(4), sustain: 0.14, release: 0.1
+          sleep 0.15
+          play :f7, divisor:(4), sustain: 0.14, release: 0.1
+          sleep 0.15
+          play :g7, divisor:(4), sustain: 0.32, release: 0.1
+          sleep 0.37
+          play :f7, divisor:(4), sustain: 0.15, release: 0.1
+          sleep 0.25
+          play :e7, divisor:(4), sustain: 0.25, release: 0.9
+          sleep 0.4
+          #play :g7, divisor:(4), sustain: 0.8, release: 0.2
+          with_fx :distortion, distort: 0.8 do
+            play :g7, divisor:(4), attack_level: 1, decay: 0.4, decay_level: 0.1, sustain: 0.5, release: 0.1
+            play :g6, divisor:(4), attack_level: 0.1, decay: 0.4, decay_level: 1, sustain: 0.5,  release: 0.1, amp: 0.2
+            sleep 1
+            play :f7, divisor:(4), sustain: 0.6, release: 0.4
+            play :f6, divisor:(4), attack_level: 0.1, decay: 0.9, decay_level: 1, release: 0.1
+            sleep 1
+          end
+        end
+      end
+      
+      guitar :e7, 4, 1, 0.77, 0.3
+      guitar :e7, 4, 0.1, 0.23, 0.1
+      guitar :g7, 4, 0.1, 0.35, 0.1
+      guitar :e7, 4, 0.1, 0.35, 0.1
+      guitar :e7, 4, 0.1, 0.3, 0.1
+      guitar :g7, 4, 0.1, 0.3, 0.2
+      guitar :e7, 4, 0.1, 0.35, 0.1
+      guitar :d7, 4, 0.1, 0.35, 0.2
+      guitar :c7, 4, 0.5, 1, 0.5
+    end
+  end
+end
+
+
 beginning
 transition
 cool_guitar
@@ -203,10 +295,15 @@ in_thread do
 end
 beginning
 transition
-cool_guitar
 
 # solo
-cool_guitar true
+
+solo1
+cool_guitar
+
+# solo 2 high
+solo2
+cool_guitar
 
 # going back transition with solo
 transition
